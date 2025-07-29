@@ -1,19 +1,20 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from utils import clean_txt
 import joblib  
 import nltk
 
+
+
 nltk.download("stopwords")
 
 
-model = joblib.load('data/best_naive_bayes_model.pkl')
-vectorizer = joblib.load('data/tfidf_vectorizer.pkl')
+model = joblib.load('data/best_naive_bayes_model2.pkl')
 
+vectorizer = joblib.load('data/tfidf_vectorizer2.pkl')
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:5173"])
 
-@app.route('/')
-def hello():
-    return "hello"
 
 @app.route('/predict', methods=['POST'])
 def predict():
